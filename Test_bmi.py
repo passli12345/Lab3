@@ -1,10 +1,10 @@
 import sys
 import os
 
-
+# Add Lab2 folder to the system path
 sys.path.insert(0, os.path.abspath('../Lab2'))
 
-
+# Import the BMI module (assuming it's named Lab2.py)
 import Lab2 as bmi
 
 def test_bmi_under_weight():
