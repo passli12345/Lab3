@@ -1,94 +1,59 @@
-# Define a dictionary to store employee information
-employee_data = [
-    {"name": "John", "age": 30, "department": "Sales", "salary": 50000},
-    {"name": "Jane", "age": 25, "department": "Marketing", "salary": 60000},
-    {"name": "Mary", "age": 23, "department": "Marketing", "salary": 56000},
-    {"name": "Chloe",  "age": 35, "department": "Engineering", "salary": 70000},
-    {"name": "Mike", "age": 32, "department": "Engineering", "salary": 65000},
-    {"name": "Peter", "age": 40, "department": "Sales", "salary": 60000}
-]
+def get_employees_by_age_range(employee_data, min_age, max_age):
+    """
+    Returns a list of employees within the specified age range.
 
-def get_employees_by_age_range(age_lower_limit, age_upper_limit):
-    result = []
+    Args:
+        employee_data: A list of dictionaries, where each dictionary
+                       represents an employee with an 'age' key.
+        min_age: The minimum age (inclusive).
+        max_age: The maximum age (inclusive).
 
-    # check for age limits and append the item to result
-    for item in employee_data:
-        if int(item["age"]) > int(age_lower_limit) and int(item["age"]) < int(age_upper_limit):
-            result.append(item)
-
-    return result
-
-def calculate_average_salary():
-    total = 0
-    average = 0
-
-    #add your implementation to calculate here
+    Returns:
+        A list of employees (dictionaries) within the age range.
+    """
+    employees_in_range = []
+    for employee in employee_data:
+        age = int(employee['age'])  
+        if min_age <= age <= max_age:
+            employees_in_range.append(employee)
+    return employees_in_range
 
 
-    return average
+def calculate_average_salary(employee_data):
+    """
+    Calculates the average salary of all employees.
 
-def get_employees_by_dept(department):
-    result = []
+    Args:
+        employee_data: A list of dictionaries, where each dictionary
+                       represents an employee with 'salary' as a key.
 
-    # Add your implementation from here
+    Returns:
+        The average salary of all employees, or 0 if the employee_data is empty.
+    """
+    if not employee_data:
+        return 0
 
+    total_salary = 0
+    for employee in employee_data:
+        total_salary += int(employee['salary'])  
 
-    return result
-
-def display_all_records():
-    print(("Name" + "\t" +"Age" +"\t" +"Department" +"\t" +"Salary" ).expandtabs(15))
-    for item in employee_data:
-        print((item["name"] + "\t" + str(item["age"]) + "\t" + item["department"] + "\t" + str(item["salary"])).expandtabs(15))
-
-
-def display_records(employee_info):
-    print(("Name" + "\t" +"Age" +"\t" +"Department" +"\t" +"Salary" ).expandtabs(15))
-    for item in employee_info:
-        print((item["name"] + "\t" + str(item["age"]) + "\t" + item["department"] + "\t" + str(item["salary"])).expandtabs(15))
-
-def display_main_menu():
-
-    print("\n----- Employee information Tracker -----")
-
-    print("Select option\n")
-
-    print("1 - Display all records")
-    print("2 - Display average salary")
-    print("3 - Display employee within age range")
-    print("4 - Display employee in a department")
+    return total_salary / len(employee_data)
 
 
-    print("Q - Quit")
+def get_employees_by_dept(employee_data, department):
+    """
+    Returns a list of employees in a given department.
 
-    option = input("Enter selection =>")
+    Args:
+        employee_data: A list of dictionaries, where each dictionary
+                       represents an employee with a 'department' key.
+        department: The department name to filter by.
 
-    if option == '1':
-        display_all_records()
-
-    elif option == '2':
-        average_salary = calculate_average_salary()
-        print("Average salary = " + str(average_salary))
-
-    elif option == '3':
-        age_lower_limit = input("age (Lower Limit) = ")
-        age_upper_limit = input("age (Uper Limit) = ")
-        employee_info = get_employees_by_age_range(age_lower_limit, age_upper_limit)
-        display_records(employee_info)
-
-
-    elif option == '4':
-        department = input("Name of Department = ")
-        employee_info = get_employees_by_dept(department)
-        display_records(employee_info)
-
-    elif option == 'Q':
-        quit()
-
-def main():
-
-    while (True):
-        display_main_menu()
-
-
-if __name__ == "__main__":
-    main()
+    Returns:
+        A list of employees (dictionaries) in the specified department.
+    """
+    employees_in_dept = []
+    for employee in employee_data:
+        if employee['department'] == department:
+            employees_in_dept.append(employee)
+    return employees_in_dept
